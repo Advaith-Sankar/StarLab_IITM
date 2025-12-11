@@ -567,6 +567,9 @@
                     <button class="tab px-6 py-2 rounded-md font-medium text-gray-800 bg-gray-100 hover:bg-gray-200" data-tab="conference">Conference</button>
                     <button class="tab px-6 py-2 rounded-md font-medium text-gray-800 bg-gray-100 hover:bg-gray-200" data-tab="patents">Patents</button>
                 </div>
+                    <div class="flex justify-center mb-8">
+                            <input type="text" id="journal-search" placeholder="Search by title, author, or year..." class="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 w-96">
+                    </div>
                 <!-- Tab Content -->
                 <div id="journal" class="tab-content active">
                     <!-- Sub-Tabs for Years -->
@@ -1617,6 +1620,19 @@
         window.addEventListener('resize', () => {
             showMediaSlide(currentMediaSlide);
         });
+
+        // Journal search functionality
+        const journalSearch = document.getElementById('journal-search');
+        const journalItems = document.querySelectorAll('#journal-list .publication-item');
+        if (journalSearch) {
+            journalSearch.addEventListener('input', () => {
+                const query = journalSearch.value.toLowerCase();
+                journalItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(query) ? 'flex' : 'none';
+                });
+            });
+        }
     </script>
 </body>
 </html>
