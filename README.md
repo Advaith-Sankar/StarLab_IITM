@@ -1,1 +1,1 @@
-# StarLab
+# 🌟 STAR Lab IIT MADRAS 🌟 
