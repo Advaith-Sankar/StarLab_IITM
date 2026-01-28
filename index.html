@@ -384,6 +384,24 @@
             background: #60a5fa; /* Lighter blue for dark mode visibility */
             color: #1f2937; /* Dark gray text for smooth contrast */
         }
+        #journal-list {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        #journal-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        #journal-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        #journal-list::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        #journal-list::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     </style>
 </head>
 <body>
@@ -579,7 +597,7 @@
                                         </div>
                                 </div>
                         </div>
-                 
+                
                         <div id="STMS" class="tab-content">
                                 <!-- Sub-Tabs -->
                                 <div class="flex justify-center space-x-4 mb-8">
@@ -696,7 +714,7 @@
                                  <!-- New PhD End-->
                             </div>
                     </div>
-                 
+                
                     <div id="ms" class="sub-tab-content">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 <div class="card bg-white rounded-xl shadow-md p-6 text-center">
@@ -717,7 +735,7 @@
                                 </div>
                             </div>
                     </div>
-                 
+                
                     <div id="mtech" class="sub-tab-content">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 <div class="card bg-white rounded-xl shadow-md p-6 text-center">
@@ -784,7 +802,7 @@
                                 </div>
                         </div>
                 </div>
-         
+        
                 <div id="staff" class="tab-content">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div class="card bg-white rounded-xl shadow-md p-6 text-center">
@@ -807,7 +825,7 @@
                             <h3 class="text-xl font-semibold text-gray-900">Antro Jagatheesh</h3>
                             <p class="text-gray-600">Senior Technician</p>
                         </div>
-                     
+                    
                         <div class="card bg-white rounded-xl shadow-md p-6 text-center">
                             <img src="people\Lakshmi 1.png" alt="Lakshmi - Team Member" class="rounded-full mx-auto mb-4">
                             <h3 class="text-xl font-semibold text-gray-900">Lakshmi</h3>
@@ -822,7 +840,7 @@
                         <button class="sub-tab px-6 py-2 rounded-md font-medium text-gray-800 bg-gray-200 hover:bg-gray-300" data-sub-tab="mtech-Alumni">M.Tech</button>
                         <button class="sub-tab px-6 py-2 rounded-md font-medium text-gray-800 bg-gray-200 hover:bg-gray-300" data-sub-tab="PDF-Alumni">Post Doc</button>
                     </div>
-                 
+                
                         <div id="phd-Alumni" class="sub-tab-content active">
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         <div class="card bg-white rounded-xl shadow-md p-6 text-center">
@@ -925,10 +943,10 @@
                                 </div>
                         </div>
                 </div>
-         
+        
             </div>
     </section>
-                 
+                
     <!-- Publications Section -->
     <section id="publications" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1366,8 +1384,8 @@
             <div class="text-center">
                 <p class="text-sm">© 2022 Smart Thermal & Renewable Systems Lab. All rights reserved.</p>
                 <div class="mt-4 flex justify-center space-x-6">
-                    <a href="https://mech.iitm.ac.in/profile.php?fname=advaith" class="hover:text-blue-400 transition"> <img src="logo/IIT_Madras_Logo.png"> </a>
-                    <a href="https://www.linkedin.com/in/advaithsankar/" class="hover:text-blue-400 transition"> <img src="logo/LinkedIn_logo.png"> </a>
+                    <a href="https://mech.iitm.ac.in/profile.php?fname=advaith" class="hover:text-blue-400 transition"> <img src="logo/IIT_Madras_Logo.png" class="w-6 h-6"> </a>
+                    <a href="https://www.linkedin.com/in/advaithsankar/" class="hover:text-blue-400 transition"> <img src="logo/LinkedIn_logo.png" class="w-6 h-6"> </a>
                 </div>
             </div>
         </div>
