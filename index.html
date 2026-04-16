@@ -1823,116 +1823,183 @@
 </div>
 
 <script>
-    // ================================================
-    // KNOWLEDGE BASE (add more entries anytime)
-    // ================================================
-    const knowledgeBase = {
-        greetings: ["hi", "hello", "hey", "namaste", "good morning"],
-        responses: {
-            "who is dr advaith": "Dr. Advaith Sankar is Assistant Professor in the Department of Mechanical Engineering at IIT Madras and leads the Smart Thermal & Renewables (STAR) Lab.",
-            "advaith": "Dr. Advaith Sankar is the faculty advisor of STAR Lab. You can find his profile at https://mech.iitm.ac.in/profile.php?fname=advaith",
-            "projects": "STAR Lab works on two major themes: Translational Renewable Energy Research and Smart Thermal Management Systems. Check the Projects section for ongoing and completed work (INDEE3, SMART-EV, PCM cold storage, etc.).",
-            "publications": "We have many papers in top journals like Solar Energy, International Journal of Refrigeration, Applied Thermal Engineering, Renewable Energy, Journal of Fluid Mechanics, and more. Visit the Publications section!",
-            "team": "Our team includes PhD scholars (Vijayakumar S., Jawahar Prakash, Durga Prasad Pydi, Suparna Dhara), MS/M.Tech students, Postdocs (Dr. Thilagan K., Dr. Vinay Kumar Yadav), and research staff. See the full 'Our Stars' section.",
-            "thilagan": "Dr. Thilagan K. is a Post Doctoral Researcher in STAR Lab (graduated PhD 2025). His profile: https://thilagan-k.github.io/Research-Profile/",
-            "contact": "You can reach us at advaith@iitm.ac.in or starlabiitm@outlook.com. Room 140, NAC-2, IIT Madras.",
-            "internship": "We welcome summer and long-term interns. Send your CV + Statement of Purpose to advaith@iitm.ac.in",
-            "postdoc": "Postdoc positions are available through Institute PDF, N-PDF, WISE-PDF etc. Email your CV and research proposal.",
-            "solar desalination": "We developed a compact solar multi-effect desalination system capable of producing ~10,000 liters of potable water per day. Featured in Times of India and IITM Tech Talk.",
-            "ev battery": "We work on Hybrid PCM-Liquid cooling and SMART-EV thermal management systems for electric vehicle batteries.",
-            "location": "STAR Lab is located in Room No. 140, New Academic Complex-2 (NAC-2), Department of Mechanical Engineering, IIT Madras, Chennai - 600036.",
-            "dark mode": "You can toggle dark/light mode using the switch in the top navigation bar.",
-            "default": "I'm not sure about that yet, but I can help you with lab info, projects, publications, team, or how to join us! Try asking about 'projects', 'publications', 'Dr. Advaith', or 'contact'."
-        }
-    };
+    <!-- ============================================= -->
+<!-- REAL AI CHATBOT - WebLLM (No API, Runs in Browser) -->
+<!-- ============================================= -->
 
-    // Simple keyword matching function
-    function getBotResponse(message) {
-        const lowerMsg = message.toLowerCase().trim();
+<!-- Floating Button -->
+<button id="chat-float-btn"
+        class="fixed bottom-6 right-6 z-[9999] flex items-center justify-center w-14 h-14 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] hover:from-[#3b82f6] hover:to-[#1e3a8a] text-white rounded-2xl shadow-2xl transition-all duration-300 hover:scale-110">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2 2 2 0 01-2-2 2 2 0 012-2 2 2 0 01-2-2z" />
+    </svg>
+</button>
+
+<!-- Chat Modal -->
+<div id="chat-modal" class="hidden fixed inset-0 z-[10000] flex items-end sm:items-center justify-center bg-black/70">
+    <div class="w-full max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl flex flex-col h-[88vh] sm:h-[620px] overflow-hidden">
         
-        // Greetings
-        if (knowledgeBase.greetings.some(g => lowerMsg.includes(g))) {
-            return "Hello! 👋 I'm STAR Lab's assistant. How can I help you today?";
-        }
-
-        // Check knowledge base
-        for (let key in knowledgeBase.responses) {
-            if (lowerMsg.includes(key)) {
-                return knowledgeBase.responses[key];
-            }
-        }
-
-        // Fallback
-        return knowledgeBase.responses.default;
-    }
-
-    // Render message
-    function addMessage(text, isUser) {
-        const messagesDiv = document.getElementById('chat-messages');
-        const messageHTML = `
-            <div class="flex ${isUser ? 'justify-end' : 'justify-start'}">
-                <div class="${isUser 
-                    ? 'bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-3xl rounded-tr-none px-5 py-3 max-w-[80%]' 
-                    : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-3xl rounded-tl-none px-5 py-3 max-w-[80%] shadow-sm'}">
-                    ${text}
+        <!-- Header -->
+        <div class="px-6 py-4 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="header_img_video/img/Star-Lab_Logo.jpg" alt="STAR Lab" class="w-9 h-9 rounded-2xl">
+                <div>
+                    <h3 class="font-semibold text-xl">STAR Lab AI Assistant</h3>
+                    <p class="text-xs opacity-90 flex items-center gap-1">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        Running locally with WebLLM
+                    </p>
                 </div>
-            </div>`;
-        messagesDiv.innerHTML += messageHTML;
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            </div>
+            <button onclick="closeChat()" class="text-white hover:bg-white/20 p-2 rounded-2xl">✕</button>
+        </div>
+
+        <!-- Messages -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-gray-900"></div>
+
+        <!-- Loading / Progress -->
+        <div id="loading-screen" class="hidden absolute inset-0 bg-white/95 dark:bg-gray-900/95 flex flex-col items-center justify-center z-10 rounded-3xl">
+            <div class="w-72 text-center">
+                <p class="text-lg font-medium mb-4">Downloading STAR Lab AI Model...</p>
+                <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-2 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] w-0 transition-all duration-300"></div>
+                </div>
+                <p id="progress-text" class="text-sm text-gray-500 dark:text-gray-400 mt-2">0%</p>
+                <p class="text-xs text-gray-400 mt-6">First time only (~250 MB). After that it's instant!</p>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <div class="flex gap-2">
+                <input id="chat-input" 
+                       type="text" 
+                       placeholder="Ask anything about STAR Lab..." 
+                       class="flex-1 px-5 py-3 bg-gray-100 dark:bg-gray-700 border border-transparent focus:border-blue-500 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none">
+                <button onclick="sendMessage()" 
+                        class="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white px-6 rounded-2xl hover:scale-105 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.874L5.999 12zm0 0h7.07" />
+                    </svg>
+                </button>
+            </div>
+            <p class="text-[10px] text-center text-gray-400 mt-2">Powered by WebLLM • Private • No data leaves your device</p>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm@latest";
+
+    let engine = null;
+    let chatHistory = [];
+
+    const systemPrompt = `You are the official STAR Lab Assistant at IIT Madras.
+    You are friendly, enthusiastic and extremely knowledgeable about:
+    - Dr. Advaith Sankar and the Smart Thermal & Renewables Lab
+    - All ongoing and completed research projects (INDEE3, SMART-EV, solar desalination, PCM cold storage, EV battery thermal management, etc.)
+    - Publications in Solar Energy, IJ Refrigeration, Applied Thermal Engineering, Renewable Energy, etc.
+    - Team members (PhD, MS, MTech, Postdocs, staff)
+    - How students can join as interns, PhD, postdoc, etc.
+    Always answer accurately. If you don't know something, say so honestly.`;
+
+    async function initWebLLM() {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.classList.remove('hidden');
+
+        try {
+            engine = await CreateMLCEngine(
+                "Phi-3.5-mini-instruct-q4f16_1-MLC",   // Excellent small & smart model
+                {
+                    progressCallback: (progress) => {
+                        const percent = Math.round(progress * 100);
+                        document.getElementById('progress-bar').style.width = percent + '%';
+                        document.getElementById('progress-text').textContent = percent + '%';
+                    }
+                }
+            );
+
+            loadingScreen.classList.add('hidden');
+            console.log('%c✅ STAR Lab Real AI Chatbot is ready!', 'color:#3b82f6; font-size:15px');
+        } catch (e) {
+            console.error(e);
+            alert("WebGPU not supported or model failed to load. Please use latest Chrome/Edge.");
+        }
     }
 
-    // Send message
-    function sendMessage() {
+    function addMessage(text, isUser) {
+        const container = document.getElementById('chat-messages');
+        const div = document.createElement('div');
+        div.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+        div.innerHTML = `
+            <div class="${isUser 
+                ? 'bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-3xl rounded-tr-none px-5 py-3 max-w-[85%]' 
+                : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-3xl rounded-tl-none px-5 py-3 max-w-[85%] shadow-sm'}">
+                ${text}
+            </div>`;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendMessage() {
         const input = document.getElementById('chat-input');
         const message = input.value.trim();
-        if (!message) return;
+        if (!message || !engine) return;
 
         addMessage(message, true);
         input.value = '';
 
-        // Simulate thinking
-        setTimeout(() => {
-            const reply = getBotResponse(message);
-            addMessage(reply, false);
-        }, 600);
+        // Add user message to history
+        chatHistory.push({ role: "user", content: message });
+
+        // Show thinking
+        const thinkingDiv = document.createElement('div');
+        thinkingDiv.id = 'thinking';
+        thinkingDiv.className = 'flex justify-start';
+        thinkingDiv.innerHTML = `<div class="bg-white dark:bg-gray-700 text-gray-500 px-5 py-3 rounded-3xl rounded-tl-none">Thinking...</div>`;
+        document.getElementById('chat-messages').appendChild(thinkingDiv);
+
+        try {
+            const reply = await engine.chat.completions.create({
+                messages: [
+                    { role: "system", content: systemPrompt },
+                    ...chatHistory
+                ],
+                temperature: 0.7,
+                max_gen_len: 1024
+            });
+
+            // Remove thinking
+            thinkingDiv.remove();
+
+            const botReply = reply.choices[0].message.content;
+            addMessage(botReply, false);
+
+            // Save to history
+            chatHistory.push({ role: "assistant", content: botReply });
+        } catch (err) {
+            thinkingDiv.remove();
+            addMessage("Sorry, something went wrong with the AI engine.", false);
+        }
     }
 
-    // Quick suggestion buttons
-    function createQuickSuggestions() {
-        const container = document.getElementById('quick-suggestions');
-        const suggestions = [
-            "Tell me about Dr. Advaith",
-            "What projects are you working on?",
-            "Show me publications",
-            "How can I join as intern/postdoc?",
-            "Solar desalination system",
-            "Contact information"
-        ];
-        
-        suggestions.forEach(text => {
-            const btn = document.createElement('button');
-            btn.className = "text-xs px-4 py-2 bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-2xl transition-colors text-gray-700 dark:text-gray-200";
-            btn.textContent = text;
-            btn.onclick = () => {
-                addMessage(text, true);
-                setTimeout(() => {
-                    const reply = getBotResponse(text);
-                    addMessage(reply, false);
-                }, 400);
-            };
-            container.appendChild(btn);
-        });
-    }
-
-    // Open / Close chat
     function openChat() {
-        document.getElementById('chat-modal').classList.remove('hidden');
-        document.getElementById('chat-modal').classList.add('flex');
-        // First message
+        const modal = document.getElementById('chat-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+
+        if (!engine) {
+            initWebLLM();
+        }
+
+        // Welcome message only once
         if (document.getElementById('chat-messages').children.length === 0) {
             setTimeout(() => {
-                addMessage("Hi there! I'm the STAR Lab Assistant 🤖<br>How can I help you explore our research today?", false);
-            }, 300);
+                addMessage("Hi! I'm your personal STAR Lab AI Assistant 🤖<br>I run completely inside your browser using WebLLM.<br>Ask me anything about our research, projects, team, or how to join!", false);
+            }, 400);
         }
     }
 
@@ -1942,34 +2009,19 @@
         modal.classList.remove('flex');
     }
 
-    // Initialize chatbot
-    function initChatbot() {
-        // Attach floating button
+    // Enter key support
+    document.addEventListener('DOMContentLoaded', () => {
         const floatBtn = document.getElementById('chat-float-btn');
         floatBtn.addEventListener('click', openChat);
 
-        // Enter key support
-        const inputField = document.getElementById('chat-input');
-        inputField.addEventListener('keypress', (e) => {
+        const input = document.getElementById('chat-input');
+        input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
 
-        // Create quick buttons
-        createQuickSuggestions();
-
-        // Keyboard shortcut (press ? while not in input)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === '/' && document.getElementById('chat-modal').classList.contains('hidden')) {
-                e.preventDefault();
-                openChat();
-            }
-        });
-
-        console.log('%c✅ STAR Lab Chatbot loaded successfully! (100% static – works perfectly on GitHub Pages)', 'color:#3b82f6; font-weight:bold');
-    }
-
-    // Auto-start when page loads
-    window.addEventListener('load', initChatbot);
+        console.log('%c🚀 Real AI WebLLM Chatbot loaded for STAR Lab', 'color:#3b82f6; font-weight:bold');
+    });
+</script>
 </script>
 </body>
 </html>
