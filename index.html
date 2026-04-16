@@ -1762,53 +1762,50 @@
         }
     </script>
 
-<!-- ADD THIS CODE EXACTLY BEFORE THE CLOSING </body> TAG (just before </html>) -->
-<!-- ====================================================== -->
-<!-- BUILT-IN STATIC CHATBOT FOR GITHUB PAGES (NO BACKEND) -->
-<!-- ====================================================== -->
+<!-- ============================================= -->
+<!-- IMPROVED RULE-BASED STAR LAB CHATBOT (v2) -->
+<!-- 100% Static • Instant • No API • GitHub Pages Ready -->
+<!-- ============================================= -->
 
 <!-- Floating Chat Button -->
 <button id="chat-float-btn"
         class="fixed bottom-6 right-6 z-[9999] flex items-center justify-center w-14 h-14 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] hover:from-[#3b82f6] hover:to-[#1e3a8a] text-white rounded-2xl shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2 2 2 0 01-2-2 2 2 0 012-2 2 2 0 01-2-2 2 2 0 012-2z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2 2 2 0 01-2-2 2 2 0 012-2z" />
     </svg>
 </button>
 
 <!-- Chat Modal -->
-<div id="chat-modal" class="hidden fixed inset-0 z-[10000] flex items-end sm:items-center justify-center bg-black/60 transition-opacity">
-    <div onclick="if(event.target.id==='chat-modal')closeChat()" class="w-full max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl flex flex-col h-[85vh] sm:h-[600px] overflow-hidden">
+<div id="chat-modal" class="hidden fixed inset-0 z-[10000] flex items-end sm:items-center justify-center bg-black/60">
+    <div class="w-full max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl flex flex-col h-[85vh] sm:h-[620px] overflow-hidden">
         
         <!-- Header -->
         <div class="px-6 py-4 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="header_img_video/img/Star-Lab_Logo.jpg" alt="STAR Lab" class="w-8 h-8 rounded-xl">
+                <img src="header_img_video/img/Star-Lab_Logo.jpg" alt="STAR Lab" class="w-9 h-9 rounded-2xl">
                 <div>
-                    <h3 class="font-semibold text-lg">STAR Lab Assistant</h3>
+                    <h3 class="font-semibold text-xl">STAR Lab Assistant</h3>
                     <p class="text-xs opacity-90">Ask me anything about the lab</p>
                 </div>
             </div>
-            <button onclick="closeChat()" class="text-white hover:bg-white/20 p-2 rounded-xl transition-colors">
-                ✕
-            </button>
+            <div class="flex items-center gap-3">
+                <button onclick="clearChat()" class="text-white hover:bg-white/20 px-3 py-1 text-sm rounded-xl transition-colors">Clear</button>
+                <button onclick="closeChat()" class="text-white hover:bg-white/20 p-2 rounded-xl">✕</button>
+            </div>
         </div>
 
         <!-- Messages Area -->
-        <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-gray-900">
-            <!-- Messages will be injected by JS -->
-        </div>
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 dark:bg-gray-900"></div>
 
-        <!-- Quick suggestions -->
-        <div id="quick-suggestions" class="px-6 py-3 border-t border-gray-200 dark:border-gray-700 flex flex-wrap gap-2">
-            <!-- Populated by JS -->
-        </div>
+        <!-- Quick Suggestions -->
+        <div id="quick-suggestions" class="px-6 py-3 border-t border-gray-200 dark:border-gray-700 flex flex-wrap gap-2 bg-white dark:bg-gray-800"></div>
 
-        <!-- Input Area -->
+        <!-- Input -->
         <div class="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
             <div class="flex gap-2">
                 <input id="chat-input" 
                        type="text" 
-                       placeholder="Ask about projects, publications, team..." 
+                       placeholder="Ask about projects, team, publications..." 
                        class="flex-1 px-5 py-3 bg-gray-100 dark:bg-gray-700 border border-transparent focus:border-blue-500 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none transition-all">
                 <button onclick="sendMessage()" 
                         class="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white px-6 rounded-2xl hover:scale-105 transition-transform">
@@ -1817,121 +1814,137 @@
                     </svg>
                 </button>
             </div>
-            <p class="text-[10px] text-center text-gray-400 dark:text-gray-500 mt-2">Built-in • Runs 100% on GitHub Pages</p>
+            <p class="text-[10px] text-center text-gray-400 dark:text-gray-500 mt-2">Built-in • Runs on GitHub Pages</p>
         </div>
     </div>
 </div>
 
 <script>
-    // ================================================
-    // KNOWLEDGE BASE (add more entries anytime)
-    // ================================================
-    const knowledgeBase = {
-        greetings: ["hi", "hello", "hey", "namaste", "good morning"],
-        responses: {
-            "who is dr advaith": "Dr. Advaith Sankar is Assistant Professor in the Department of Mechanical Engineering at IIT Madras and leads the Smart Thermal & Renewables (STAR) Lab.",
-            "advaith": "Dr. Advaith Sankar is the faculty advisor of STAR Lab. You can find his profile at https://mech.iitm.ac.in/profile.php?fname=advaith",
-            "projects": "STAR Lab works on two major themes: Translational Renewable Energy Research and Smart Thermal Management Systems. Check the Projects section for ongoing and completed work (INDEE3, SMART-EV, PCM cold storage, etc.).",
-            "publications": "We have many papers in top journals like Solar Energy, International Journal of Refrigeration, Applied Thermal Engineering, Renewable Energy, Journal of Fluid Mechanics, and more. Visit the Publications section!",
-            "team": "Our team includes PhD scholars (Vijayakumar S., Jawahar Prakash, Durga Prasad Pydi, Suparna Dhara), MS/M.Tech students, Postdocs (Dr. Thilagan K., Dr. Vinay Kumar Yadav), and research staff. See the full 'Our Stars' section.",
-            "thilagan": "Dr. Thilagan K. is a Post Doctoral Researcher in STAR Lab (graduated PhD 2025). His profile: https://thilagan-k.github.io/Research-Profile/",
-            "contact": "You can reach us at advaith@iitm.ac.in or starlabiitm@outlook.com. Room 140, NAC-2, IIT Madras.",
-            "internship": "We welcome summer and long-term interns. Send your CV + Statement of Purpose to advaith@iitm.ac.in",
-            "postdoc": "Postdoc positions are available through Institute PDF, N-PDF, WISE-PDF etc. Email your CV and research proposal.",
-            "solar desalination": "We developed a compact solar multi-effect desalination system capable of producing ~10,000 liters of potable water per day. Featured in Times of India and IITM Tech Talk.",
-            "ev battery": "We work on Hybrid PCM-Liquid cooling and SMART-EV thermal management systems for electric vehicle batteries.",
-            "location": "STAR Lab is located in Room No. 140, New Academic Complex-2 (NAC-2), Department of Mechanical Engineering, IIT Madras, Chennai - 600036.",
-            "dark mode": "You can toggle dark/light mode using the switch in the top navigation bar.",
-            "default": "I'm not sure about that yet, but I can help you with lab info, projects, publications, team, or how to join us! Try asking about 'projects', 'publications', 'Dr. Advaith', or 'contact'."
-        }
+    // ==================== KNOWLEDGE BASE (Very Detailed) ====================
+    const knowledge = {
+        greetings: ["hi", "hello", "hey", "namaste", "good morning", "good afternoon"],
+        
+        qa: [
+            { keywords: ["advaith", "dr advaith", "professor", "faculty"], 
+              reply: "Dr. Advaith Sankar is Assistant Professor in the Department of Mechanical Engineering at IIT Madras and leads the Smart Thermal & Renewables (STAR) Lab. <a href='https://mech.iitm.ac.in/profile.php?fname=advaith' target='_blank' class='text-blue-600 underline'>View his profile</a>" },
+            
+            { keywords: ["project", "projects", "research"], 
+              reply: "STAR Lab works on two main themes: Translational Renewable Energy Research and Smart Thermal Management Systems. Ongoing projects include INDEE3, SMART-EV battery thermal management, solar desalination, PCM cold storage, and more. Check the <a href='#projects' class='text-blue-600 underline'>Projects section</a>." },
+            
+            { keywords: ["solar desalination", "desal", "water"], 
+              reply: "We developed a compact solar multi-effect desalination system that can produce up to 10,000 liters of potable water per day. It was featured in Times of India and IITM Tech Talk!" },
+            
+            { keywords: ["ev", "battery", "electric vehicle", "smart-ev"], 
+              reply: "We are working on the Hybrid & Safe-Modular-Adaptive-Robust-Thermal (SMART) management system for EV batteries using hybrid PCM-liquid cooling." },
+            
+            { keywords: ["team", "stars", "members", "phd", "postdoc"], 
+              reply: "Our team includes PhD scholars (Vijayakumar S., Jawahar Prakash, Durga Prasad Pydi, Suparna Dhara), Postdocs (Dr. Thilagan K., Dr. Vinay Kumar Yadav), and dedicated research staff. See the full <a href='#team' class='text-blue-600 underline'>Our Stars section</a>." },
+            
+            { keywords: ["thilagan", "dr thilagan"], 
+              reply: "Dr. Thilagan K. is a Post Doctoral Researcher in STAR Lab (PhD graduated 2025). His research profile: <a href='https://thilagan-k.github.io/Research-Profile/' target='_blank' class='text-blue-600 underline'>View here</a>" },
+            
+            { keywords: ["publication", "publications", "paper", "journal"], 
+              reply: "We have publications in top journals including Solar Energy, International Journal of Refrigeration, Applied Thermal Engineering, Renewable Energy, Journal of Fluid Mechanics, and more. Explore them in the <a href='#publications' class='text-blue-600 underline'>Publications section</a>." },
+            
+            { keywords: ["intern", "internship", "join", "phd", "ms", "postdoc", "career"], 
+              reply: "We welcome interns, PhD/MS students, and postdocs! Send your CV + Statement of Purpose to advaith@iitm.ac.in or starlabiitm@outlook.com. Postdoc fellowships (Institute PDF, N-PDF, WISE-PDF) are also available." },
+            
+            { keywords: ["contact", "email", "phone", "location"], 
+              reply: "Email: advaith@iitm.ac.in or starlabiitm@outlook.com<br>Location: Room 140, NAC-2, Department of Mechanical Engineering, IIT Madras, Chennai - 600036" },
+            
+            { keywords: ["news", "media", "toi", "times of india"], 
+              reply: "Our solar desalination work was recently covered in Times of India (June 2025) and featured on IITM Tech Talk and LinkedIn." }
+        ],
+
+        defaultReply: "I'm not sure about that one, but I can help you with Dr. Advaith, our projects (INDEE3, SMART-EV, solar desalination), publications, team members, or how to join the lab. What would you like to know?"
     };
 
-    // Simple keyword matching function
-    function getBotResponse(message) {
-        const lowerMsg = message.toLowerCase().trim();
+    let chatHistory = [];
+
+    function getBotResponse(msg) {
+        const lower = msg.toLowerCase().trim();
         
         // Greetings
-        if (knowledgeBase.greetings.some(g => lowerMsg.includes(g))) {
-            return "Hello! 👋 I'm STAR Lab's assistant. How can I help you today?";
+        if (knowledge.greetings.some(g => lower.includes(g))) {
+            return "Hello! 👋 Welcome to STAR Lab at IIT Madras. How can I help you explore our research today?";
         }
 
-        // Check knowledge base
-        for (let key in knowledgeBase.responses) {
-            if (lowerMsg.includes(key)) {
-                return knowledgeBase.responses[key];
+        // Smart matching
+        for (let item of knowledge.qa) {
+            if (item.keywords.some(k => lower.includes(k))) {
+                return item.reply;
             }
         }
 
-        // Fallback
-        return knowledgeBase.responses.default;
+        return knowledge.defaultReply;
     }
 
-    // Render message
     function addMessage(text, isUser) {
-        const messagesDiv = document.getElementById('chat-messages');
-        const messageHTML = `
-            <div class="flex ${isUser ? 'justify-end' : 'justify-start'}">
-                <div class="${isUser 
-                    ? 'bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-3xl rounded-tr-none px-5 py-3 max-w-[80%]' 
-                    : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-3xl rounded-tl-none px-5 py-3 max-w-[80%] shadow-sm'}">
-                    ${text}
-                </div>
+        const container = document.getElementById('chat-messages');
+        const div = document.createElement('div');
+        div.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+        div.innerHTML = `
+            <div class="${isUser 
+                ? 'bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-3xl rounded-tr-none px-5 py-3 max-w-[85%]' 
+                : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-3xl rounded-tl-none px-5 py-3 max-w-[85%] shadow-sm'}">
+                ${text}
             </div>`;
-        messagesDiv.innerHTML += messageHTML;
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
     }
 
-    // Send message
     function sendMessage() {
         const input = document.getElementById('chat-input');
         const message = input.value.trim();
         if (!message) return;
 
         addMessage(message, true);
+        chatHistory.push({role: "user", content: message});
         input.value = '';
 
-        // Simulate thinking
         setTimeout(() => {
             const reply = getBotResponse(message);
             addMessage(reply, false);
-        }, 600);
+            chatHistory.push({role: "assistant", content: reply});
+        }, 500);
     }
 
-    // Quick suggestion buttons
     function createQuickSuggestions() {
         const container = document.getElementById('quick-suggestions');
         const suggestions = [
-            "Tell me about Dr. Advaith",
-            "What projects are you working on?",
-            "Show me publications",
-            "How can I join as intern/postdoc?",
+            "Who is Dr. Advaith?",
+            "Tell me about current projects",
             "Solar desalination system",
+            "How can I join as intern or PhD?",
+            "Show me publications",
             "Contact information"
         ];
         
         suggestions.forEach(text => {
             const btn = document.createElement('button');
-            btn.className = "text-xs px-4 py-2 bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-2xl transition-colors text-gray-700 dark:text-gray-200";
+            btn.className = "text-xs px-4 py-2 bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 rounded-2xl text-gray-700 dark:text-gray-200 transition-colors";
             btn.textContent = text;
             btn.onclick = () => {
                 addMessage(text, true);
+                chatHistory.push({role: "user", content: text});
                 setTimeout(() => {
                     const reply = getBotResponse(text);
                     addMessage(reply, false);
+                    chatHistory.push({role: "assistant", content: reply});
                 }, 400);
             };
             container.appendChild(btn);
         });
     }
 
-    // Open / Close chat
     function openChat() {
-        document.getElementById('chat-modal').classList.remove('hidden');
-        document.getElementById('chat-modal').classList.add('flex');
-        // First message
+        const modal = document.getElementById('chat-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+
         if (document.getElementById('chat-messages').children.length === 0) {
             setTimeout(() => {
-                addMessage("Hi there! I'm the STAR Lab Assistant 🤖<br>How can I help you explore our research today?", false);
+                addMessage("Hi there! 👋 I'm the official STAR Lab Assistant.<br>Ask me anything about our research, projects, team, publications, or how to join us!", false);
             }, 300);
         }
     }
@@ -1942,34 +1955,26 @@
         modal.classList.remove('flex');
     }
 
-    // Initialize chatbot
-    function initChatbot() {
-        // Attach floating button
-        const floatBtn = document.getElementById('chat-float-btn');
-        floatBtn.addEventListener('click', openChat);
+    function clearChat() {
+        document.getElementById('chat-messages').innerHTML = '';
+        chatHistory = [];
+        addMessage("Chat cleared. How can I help you today? 👋", false);
+    }
 
-        // Enter key support
-        const inputField = document.getElementById('chat-input');
-        inputField.addEventListener('keypress', (e) => {
+    // Initialize
+    window.addEventListener('load', () => {
+        const btn = document.getElementById('chat-float-btn');
+        btn.addEventListener('click', openChat);
+
+        const input = document.getElementById('chat-input');
+        input.addEventListener('keypress', e => {
             if (e.key === 'Enter') sendMessage();
         });
 
-        // Create quick buttons
         createQuickSuggestions();
 
-        // Keyboard shortcut (press ? while not in input)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === '/' && document.getElementById('chat-modal').classList.contains('hidden')) {
-                e.preventDefault();
-                openChat();
-            }
-        });
-
-        console.log('%c✅ STAR Lab Chatbot loaded successfully! (100% static – works perfectly on GitHub Pages)', 'color:#3b82f6; font-weight:bold');
-    }
-
-    // Auto-start when page loads
-    window.addEventListener('load', initChatbot);
+        console.log('%c✅ Improved STAR Lab Chatbot (Rule-based v2) loaded successfully!', 'color:#3b82f6; font-weight:bold');
+    });
 </script>
 </body>
 </html>
